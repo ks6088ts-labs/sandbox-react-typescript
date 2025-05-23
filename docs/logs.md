@@ -75,3 +75,8 @@ GitHub Actions を使って GitHub Pages へデプロイする
 ```prompt
 GitHub Pages にウェブサイトをデプロイする workflow を書いて
 ```
+
+```prompt
+GitHub Pages にデプロイしたところ javascript, svg のアセットがロードできません。リポジトリは以下です。修正して。
+https://github.com/ks6088ts-labs/sandbox-react-typescript
+```
