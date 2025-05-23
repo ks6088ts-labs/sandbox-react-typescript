@@ -4,6 +4,53 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+// 汎用テーブル表示コンポーネント
+function DataTable({ data }: { data: unknown }) {
+  if (!data) return null;
+  // 配列の場合
+  if (Array.isArray(data)) {
+    if (data.length === 0) return <div>データなし</div>;
+    const columns = Object.keys(data[0] ?? {});
+    return (
+      <table border={1} style={{ borderCollapse: 'collapse', margin: '1em 0' }}>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col} style={{ padding: '0.5em' }}>{col}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {(data as Record<string, unknown>[]).map((row, i) => (
+            <tr key={i}>
+              {columns.map((col) => (
+                <td key={col} style={{ padding: '0.5em' }}>{String(row[col])}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+  // オブジェクトの場合
+  if (typeof data === 'object') {
+    return (
+      <table border={1} style={{ borderCollapse: 'collapse', margin: '1em 0' }}>
+        <tbody>
+          {Object.entries(data as Record<string, unknown>).map(([key, value]) => (
+            <tr key={key}>
+              <th style={{ padding: '0.5em', textAlign: 'left' }}>{key}</th>
+              <td style={{ padding: '0.5em' }}>{String(value)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+  // それ以外（プリミティブ型）はそのまま表示
+  return <div>{String(data)}</div>;
+}
+
 function App() {
   // 環境変数から初期URL取得（Viteの場合は import.meta.env.VITE_API_URL）
   const defaultApiUrl = import.meta.env.VITE_API_URL || '';
@@ -53,7 +100,7 @@ function App() {
       </div>
       {loading && <div>ローディング中...</div>}
       {error && <div style={{ color: 'red' }}>エラー: {error.message}</div>}
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      {data && <DataTable data={data} />}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
