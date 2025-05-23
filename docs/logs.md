@@ -69,3 +69,9 @@ API 呼び出し結果の JSON をテーブル形式で表示する
 ```prompt
 API 呼び出しの返り値をきれいにテーブル形式で表示して
 ```
+
+GitHub Actions を使って GitHub Pages へデプロイする
+
+```prompt
+GitHub Pages にウェブサイトをデプロイする workflow を書いて
+```
