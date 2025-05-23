@@ -24,7 +24,9 @@ pnpm run dev
 $ pnpm add tailwindcss @tailwindcss/vite
 ```
 
-# Prompts
+# 生成 AI を活用した開発
+
+HTTP API 呼び出しコードをフロントエンドアプリに追加する
 
 ```prompt
 HTTP で Web API を呼び出す実装を適切な設計で追加してください。実装は以下の条件を満たしてください
@@ -41,4 +43,23 @@ HTTP で Web API を呼び出す実装を適切な設計で追加してくださ
 - Web API の呼び出しは、必要に応じて認証情報をヘッダーに含めること
 - Web API の呼び出しは、必要に応じてクエリパラメータを設定すること
 - Web API の呼び出しは、必要に応じてリクエストボディを設定すること
+```
+
+API のレスポンスをモックする
+
+```prompt
+json-server を使ったモックAPIサーバを追加して。
+```
+
+モック API サーバーにフロントエンドアプリを接続する
+
+```shell
+# .env ファイルを作成
+echo "VITE_API_URL=http://localhost:3001/posts" > .env
+
+# モック API サーバーを起動
+pnpm run mock:api
+
+# フロントエンドアプリを起動
+pnpm run dev
 ```
